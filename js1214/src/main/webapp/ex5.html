@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>자료형</title>
+<script>
+	let a = 10;
+	console.log(typeof(a)); // number type
+	let a2 = 3.14;
+	console.log(typeof(a2)); // 실수도 number type
+	
+	let b = true; // true
+	console.log(typeof(b)); // boolean type
+	let c = 7>5;
+	if(c) {
+		console.log('7은 5보다 크다');
+	}
+	
+	let d = 'hello'; // "", ``
+	console.log(typeof(d)); // string type
+	
+	let e;
+	console.log(typeof(e)); // undefined type
+	
+	let f = null;
+	console.log(typeof(f)); // object type
+	
+	let g = [1,2,3]; // 배열
+	console.log(typeof(g)); // object type
+	console.log(g[1]); // 2
+	
+	let h = {name:'루피', age:19}; // 객체
+	console.log(typeof(h));
+	console.log(h.name); // 루피
+	
+	let i = function() { // 변수에 함수가 대입된다.
+		alert('test...');
+		return true;
+	};
+	console.log(typeof(i)); // function type
+	i();
+	console.log(i);
+	
+	let j = i;
+	console.log(typeof(j)); // function type
+	j();
+	
+	let k = i();
+	console.log(typeof(k)); // boolean
+	console.log(k);
+</script>
+</head>
+<body>
+</body>
+</html>

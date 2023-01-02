@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 
+		sn1 입력 후 blur이벤트 발생시 -> sn2 focus
+		sn2 입력 후 blur이벤트 발생시 
+		1) 글자수 체크
+		2) 나이 출력
+		 	날짜 API 사용 
+		 	let today = new Date();
+		3) 성별 출력
+			검색사이트에서 주민번호 알고리즘 검색 	
+	 -->
+	 <form>
+	 	<table border="1">
+	 		<tr>
+	 			<td>주민번호</td>	 		
+	 			<td>
+	 				<input type="text" id="sn1">
+	 				-
+	 				<input type="text" id="sn2">
+	 			</td>
+	 		</tr>
+	 		<tr>
+	 			<td>나이</td>
+	 			<td><input type="number" id="age" readonly="readonly"></td>
+	 		</tr>
+	 		<tr>
+	 			<td>성별</td>
+	 			<td>
+	 				<input type="radio" name="gender" class="gender" id="male" onclick="return(false);">남
+	 				<input type="radio" name="gender" class="gender" id="female" onclick="return(false);">여
+	 			</td>
+	 		</tr>
+	 	</table>
+	 </form>
+	 <script>
+	 	//주민번호 입력이벤트 
+		let sn1 = document.querySelector('#sn1');
+		let sn2 = document.querySelector('#sn2');
+		let age = document.querySelector('#age');		
+		let today = new Date();
+		let year = today.getFullYear(); //오늘 연도
+		sn1.addEventListener('blur',function(){
+			if(sn1.value.length<6){
+				alert('주민번호를 모두 입력하세여');				
+			} else if(sn1.value.length > 6){
+				sn1.value = sn1.value.substring(0,7);
+				sn2.focus();
+			}
+		})			
+		sn2.addEventListener('blur',function(){
+			if(sn2.value.length<7){
+				alert('주민번호를 모두 입력하세여');				
+			} else if(sn2.value.length > 7){
+				sn2.value = sn2.value.substring(0,7);				
+			}		
+		//나이 출력	
+		let sn3 = sn2.value.substring(0,1); // 주민등록번호 뒷자리 출력 1,2=> 19년대 3,4 =>20년대
+		if(sn3==1 || sn3==2){
+			age.value = year-(1900+Number(sn1.value.substring(0,2)));
+		} else if(sn3==3 || sn3==4) {
+			age.value = year-(2000+Number(sn1.value.substring(0,2)));
+		}	
+		console.log(sn3);
+		//성별 출력
+		if(Number(sn2.value.substring(0,1))%2 == 0){	
+			document.querySelector('#female').checked = true;			
+			 } else{
+				 document.querySelector('#male').checked = true;				 
+			 }
+		})
+	 </script>
+</body>
+</html>

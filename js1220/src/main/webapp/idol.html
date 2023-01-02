@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+   /* 생성자 만들때 class 문법을 사용하는 방법
+   class Idol {
+      constructor(age, name, gender, team) {
+         this.age = age; 
+         this.name = name;
+         this.gender = gender;
+         this.team = team;
+      }
+   }
+   */
+   
+   // let Idol = function(age, name, gender, team) { ... }
+   function Idol(age, name, gender, team) { // name 속성은 키값 : 중복X
+      this.age = age; // this.age : this바인딩된 age, age : 지역변수 age
+      this.name = name;
+      this.gender = gender;
+      this.team = team;
+   }
+   
+   let db = []; // 모델 초기화
+   // 모델 샘플DB 추가 
+   // let rm = new Idol(29, '김남준', '남', 'BTS');
+   db.push(new Idol(19, '루피', '남', '밀짚모자해적단'));
+   db.push(new Idol(40, '샹크스', '남', '빨간머리해적단'));
+   db.push(new Idol(23, '나미', '여', '밀짚모자해적단'));
+   
+   function resetIdolList() {
+      // db를 리스트를 출력하기전에 리셋 후
+      $('#idolList').empty();
+      
+      if(db.length == 0) { // Idol 데이터가 없다면
+         let html = '<tr><td colspan="5" style="text-align:center;">데이터가 없습니다.</td></tr>';
+         $('#idolList').html(html);
+      } else {
+         /* 
+         db.forEach(function(item, index){
+            
+         }); 코어API each함수
+         */
+         
+         $(db).each(function(index, item) {
+            /*
+            let html = '<tr>';
+               html +=      '<td><input type="checkbox" class="ck" value="'+item.name+'"></td>';
+               html +=      '<td>'+item.age+'</td>';
+               html +=      '<td>'+item.name+'</td>';
+               html +=      '<td>'+item.gender+'</td>';
+               html +=      '<td>'+item.team+'</td>';
+               html += '</tr>';
+            */   
+            // 문자열 사용시 백틱(`)표현식을 사용하면 좀더 편하게   
+            let html = `<tr>
+                        <td><input type="checkbox" class="ck" value="${item.name}"></td>
+                        <td>${item.age}</td>
+                        <td>${item.name}</td>
+                        <td>${item.gender}</td>
+                        <td>${item.team}</td>`;
+            $('#idolList').append(html);
+         }); // jQuery each함수
+      }
+   }
+   
+   $(document).ready(function() {
+      resetIdolList(); // 시작시 db목록 출력
+      
+      // 아이돌 추가 버턴 이벤트 처리
+      $('#addBtn').click(function() {
+         // 폼 유효성 검사
+         // age 숫자만, name 2자이상, gender 공백, team 공백         
+         if($('#age').val()=='' || isNaN($('#age').val())) { // isNaN(매개값) -- > Not a Number 매개값이 숫자가 아닐때 참
+            alert('age는 숫자만 입력하세요');
+         } else if($('#name').val().length < 2) {
+            alert('name은 두자 이상 입력하세요');
+         } else if($('.gender:checked').length == 0) {
+            alert('성별을 선택하세요');
+         } else if($('#team').val == '') {
+            alert('그룹명을 입력하세요');
+         } else {
+            db.push(new Idol($('#age').val(), $('#name').val(), $('.gender:checked').val(), $('#team').val()));
+         }
+         console.log(db); // 추가된 아이돌 목록을 출력 디버깅  
+         resetIdolList(); // db내용이 수정(추가)되었으니 리셋 후 출력
+      });
+      
+      // 아이돌 삭제버턴 이벤트 처리
+      $('#deleteBtn').click(function() {
+         if($('.ck:checked').length == 0) {
+            alert('아이돌 멤버를 1명이상 선택하세요');
+         } else {
+            let ck = $('.ck:checked'); // 배열 
+            $(ck).each(function(index, item) { // jQuery API를 사용할려면 $(변수)
+               $(db).each(function(dbIndex, dbItem) {
+                  if($(item).val() == dbItem.name) { // if(item.value == dbItem.name) {
+                     db.splice(dbIndex, 1); // (자를 인덱스위치, 인덱스부터 몇개)
+                  }
+               });
+            });
+         }
+         // 출력 목록 리셋
+         resetIdolList();
+      });
+      
+      // 아이돌 수정(폼)버턴 이벤트 처리
+      $('#updateFormBtn').click(function() {
+         if($('.ck:checked').length != 1) {
+            alert('수정할 아이돌 1명을 선택하셔야 합니다');
+         } else {
+            let ck = $('.ck:checked');
+            console.log(ck.val()); // $(.)클래스명으로 가져올때 길이가 1이면 바로 val()함수 사용 가능
+            let idol = null;
+            $(db).each(function(index, item) {
+               if(ck.val() == item.name) {
+                  idol = new Idol(item.age, item.name, item.gender, item.team);
+               }
+            });
+            console.log(idol);
+            let html = `<span>나이 : <input type="number" id="updateAge" value="${idol.age}"></span>
+                     <span>이름 : <input type="text" id="updateName" value="${idol.name}" readonly="readonly"></span>
+                     <span>
+                        성별 : 
+                        <input type="radio" name="updateGender" class="updateGender" value="남" checked="checked">남
+                        <input type="radio" name="updateGender" class="updateGender" value="여">여
+                     </span>
+                     <span>그룹 : <input type="text" id="updateTeam" value="${idol.team}"></span>
+                     <span><button type="button" id="updateBtn">수정</button></span>`;
+                     
+            if(idol.gender == '여') {
+               html = `<span>나이 : <input type="number" id="updateAge" value="${idol.age}"></span>
+                     <span>이름 : <input type="text" id="updateName" value="${idol.name}" readonly="readonly"></span>
+                     <span>
+                        성별 : 
+                        <input type="radio" name="updateGender" class="updateGender" value="남">남
+                        <input type="radio" name="updateGender" class="updateGender" value="여" checked="checked">여
+                     </span>
+                     <span>그룹 : <input type="text" id="updateTeam" value="${idol.team}"></span>
+                     <span><button type="button" id="updateBtn">수정</button></span>`;
+            }
+            //동적으로 추가된 버턴의 이벤트 처리는 $(document).on('click', .... )
+            $('#updateForm').html(html);
+         }
+      });
+      
+      // 수정 버턴(동적으로 추가된 버턴) 이벤트 처리
+      /*
+      정적태그에 대한 이벤트처리시 사용되는 코드
+      $('#updateBtn').click(function(){});
+      */
+      $(document).on('click', '#updateBtn', function(){
+         $(db).each(function(index, item){
+            if($('#updateName').val() == item.name) {
+               item.age = $('#updateAge').val();
+               item.gender = $('.updateGender:checked').val();
+               item.team = $('#updateTeam').val();
+               console.log(item);
+            }
+         });
+         resetIdolList();
+         $('#updateForm').empty(); // 태그와 태그사이를 비울때 
+      });
+   });
+</script>
+</head>
+<body>
+   
+   <!-- 입력 양식 -->
+   <fieldset>
+      <legend>아이돌 입력</legend>
+      <span>나이 : <input type="number" id="age"></span>
+      <span>이름 : <input type="text" id="name"></span>
+      <span>
+         성별 : 
+         <input type="radio" name="gender" class="gender" value="남">남
+         <input type="radio" name="gender" class="gender" value="여">여
+      </span>
+      <span>그룹 : <input type="text" id="team"></span>
+      <button type="button" id="addBtn">추가</button>
+   </fieldset>
+   
+   <!-- 삭제/수정 양식 -->
+   <fieldset>
+      <legend>아이돌 삭제/수정</legend>
+      <button type="button" id="deleteBtn">삭제</button>
+      <button type="button" id="updateFormBtn">수정폼</button>
+      <span id="updateForm"></span>
+   </fieldset>
+   
+   <h1>아이돌 목록</h1>
+   <table border="1" width="100%">
+      <thead>
+         <tr>
+            <th>&nbsp;</th>
+            <th>나이</th>
+            <th>이름</th>
+            <th>성별</th>
+            <th>그룹</th>
+         </tr>
+      </thead>
+      <tbody id="idolList">
+      </tbody>
+   </table>
+</body>
+</html>

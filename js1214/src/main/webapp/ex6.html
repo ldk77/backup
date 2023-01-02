@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>1급 함수</title>
+<script>
+   // 변수에 함수가 대입된다
+   
+   // 함수의 매개변수에 다른함수가 입력된다
+   let paramFun = function(p) { // p는 함수값을 입력받는다
+      let result = p() * 2;
+      return result;
+   }
+   
+   let temp = function() {
+      return 10*5; // 50을 반환하는 함수
+   }
+   let result = paramFun(temp); // 매개변수로 함수코드가 입력되어야 한다.
+   console.log(result);
+   
+   let result2 = paramFun(function(){
+                        return 10 * 5;   
+                     });
+   console.log(result2);
+   
+   // 함수의 리턴값으로 다른함수가 사용된다
+   let returnFun = function() {
+      let innerFun = function() {
+         console.log('함수가 함수를 반환');
+      }
+      return innerFun;
+   };
+   
+   returnFun()();
+</script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	// 1) 객체를 복사하는
+	let s1= {
+				name:null
+				, grade:0
+				, age:0
+				, gender:null
+				, study:function(){
+							alert('공부한다')				
+					}
+	};
+	
+	s1.name = '루피';
+	s1.grade = 7;
+	s1.age = '남';
+	alert(s1.name);
+	s1.study();	
+	
+	// 2) 객체를 반환하는 함수를 이용한다 
+	let getStudent = function() {
+		return {
+				name:null
+				, grade:0
+				, age:0
+				, gender:null
+				, study:function(){
+							alert('공부한다')				
+					}
+			
+		};
+	}
+	s3 = getStudent();
+	s3.name = '나미';
+	console.log(s3.name);
+	s3.study();
+	
+	// 3) 개체를 생성하는 함수(생성자)를 이용한다. 
+	let Student2 = function() {
+		this.name = null; 
+		this.grade = 0;
+		this.age = 0;
+		this.gender = null;
+		this.study = function() {
+				console.log('공부한다');
+		}
+	};
+	let s4 = Student2(); // 생성자함수는 new연산자와 같이 사용되어야한다. new 연산자가 없으면 undefined값 반환
+	console.log(s4); // undefined
+	// console.log(s4.grade);
+	// s4.study();
+</script>
+</head>
+<body>
+</body>
+</html>

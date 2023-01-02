@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>signin</title>
+</head>
+<body>
+   <h1>
+   회원가입
+   </h1>
+   <form id="signinForm" action="./signinAction.jsp">
+      <fieldset>
+         <legend>01 로그인 정보</legend>
+         <table border="1">
+            <tr>
+               <td>사용자 ID</td>
+               <td><input type="text" id="id" name="id" value=""></td>
+            </tr>
+            <tr>
+               <td>비밀번호</td>
+               <td><input type="password" id="pw" name="pw"></td>
+            </tr>
+            <tr>
+               <td>비밀번호확인</td>
+               <td><input type="password" id="pwConfirm"></td>
+            </tr>
+         </table>
+      </fieldset>
+      <fieldset>
+         <legend>02 개인 정보</legend>
+         <table border="1">
+            <tr>
+               <td>이름</td>
+               <td><input type="text" id="name" name="name"></td>
+            </tr>
+            <tr>
+               <td>주민등록번호</td>
+               <td>
+                  <input type="text" id="sn1" name="sn1">-
+                  <input type="text" id="sn2" name="sn2">
+               </td>
+            </tr>
+            <tr>
+               <td>생년월일</td>
+               <td>
+                  <input type="date" id="birth" name="date">               
+                  <input type="radio" class="lunarSolar" name="lunarSolar">양력
+                  <input type="radio" class="lunarSolar" name="lunarSolar">음력
+               </td>
+            </tr>
+            <tr>
+               <td>연락처</td>
+               <td>
+                  <select id="localNum" name="localNum">
+                     <option value="">==선택==</option>
+                     <option value="02">02</option>
+                     <option value="031">031</option>
+                     <option value="051">051</option>
+                  </select>-
+                  <input type="text">-
+                  <input type="text">
+                  <input type="radio" name=phone>자택
+                  <input type="radio" name=phone>직장
+               </td>
+            </tr>
+            <tr>
+               <td>휴대전화</td>
+               <td>
+                  <input type="text">-
+                  <input type="text">-
+                  <input type="text">
+               </td>
+            </tr>
+            <tr>
+               <td>E-mail 주소</td>
+               <td><input type="email"></td>
+            </tr>
+            <tr>
+               <td>주소</td>
+               <td>
+                  <input type="text">-
+                  <input type="text">
+               </td>
+            </tr>
+            <tr>   
+               <td></td>
+               <td>
+                  <input type="text">
+                  <br>
+                  <input type="text"> 
+               </td>
+            </tr>
+         </table>
+      </fieldset>
+      <fieldset>
+         <legend>03 기타정보</legend>
+         <table border="1">
+            <tr>
+               <td>직업</td>
+               <td>
+                  <select>
+                     <option value="">===선택하세요===</option>
+                     <option value="대학생">대학생</option>
+                     <option value="직장인">직장인</option>
+                     <option value="취업준비생">취업준비생</option>
+                     <option value="자영업자">자영업자</option>
+                  </select>
+               </td>
+            </tr>
+            <tr>
+               <td>회사명(학교)</td>
+               <td><input type="text"></td>
+            </tr>
+            <tr>
+               <td>사업자번호</td>
+               <td><input type="text"></td>
+            </tr>
+            <tr>
+               <td>부서명(학과)</td>
+               <td><input type="text"></td>
+            </tr>
+            <tr>
+               <td>직위(학년)</td>
+               <td><input type="text"></td>
+            </tr>
+            <tr>
+               <td>관심분야</td>
+               <td>
+                  <select>
+                     <option value="">===선택하세요===</option>
+                     <option value="">IT/인터넷</option>
+                     <option value="">음악</option>
+                     <option value="">패션</option>
+                     <option value="">외식</option>
+                  </select>
+               </td>
+            </tr>
+            <tr>
+               <td>마케팅 메일 수신</td>
+               <td>
+                  <input type="radio" name="y">수신동의
+                  <input type="radio" name="y">수신하지않음
+               </td>
+            </tr>
+            <tr>
+               <td colspan="2">
+                  <div>개인정보의 수집 및 이용에 대한 동의 (필수)</div>
+                  <div>
+                     <p>
+                     1. 수집하는 개인정보 항목
+                     문화체육관광부 대표 누리집의 이용자 참여와 이용통계 분석 등의 서비스를 위해 회원 가입시 아래의 개인정보를 수집하고 있습니다.
+                     </p>
+                     <p>
+                     가. 필수정보: 아이디, 이름, 성별, 출생년도, 비밀번호, 이메일
+                     나. 서비스 이용 과정에서 아래와 같은 정보들이 자동으로 생성되어 수집될 수 있습니다.
+                     (접속로그, 접속IP정보, 쿠키, 방문 일시, 서비스 이용기록, 불량 이용 기록)
+                     </p>
+                     <p>                     
+                     2. 대표 누리집에서 이용자 회원가입 시 직접 개인정보를 입력 및 수정하여 개인정보를 수집합니다.
+                     </p>
+                     <p>                     
+                     3. 수집 개인정보의 이용목적
+                     회원가입, 회원활동 실적 관리, 회원탈퇴 의사 확인 등 회원관리
+                     제공되는 서비스 이용에 관한 인구통계학적 분석, 서비스 방문 및 이용기록 분석, 관심사에 기반한 맞춤형 서비스 등 제공
+                     신규 서비스 개발 및 활성화, 홍보 및 이벤트, 전자우편 서비스 등 정보 전달
+                     향후 법정 대리인 본인확인, 분쟁 조정을 위한 기록보존, 불만처리 등 민원처리, 고지사항 전달 등
+                     </p>
+                     <p>                     
+                     4. 개인정보의 보유 및 이용기간
+                     이용자의 개인정보는 원칙적으로 개인정보의 수집 및 이용목적이 달성되면 지체 없이 파기합니다.
+                     따라서 최종 로그인 후 2년이 경과하였거나 정보주체의 회원 탈퇴 신청 시 회원의 개인정보를 지체 없이 파기합니다.
+                     </p>
+                     <p>                     
+                     동의 거부 권리 사실 및 불이익 내용
+                     이용자는 동의를 거부할 권리가 있습니다. 동의를 거부할 경우에는 서비스 이용에 제한됨을 알려드립니다.
+                     </p>
+                  </div>
+                  <div><input type="checkbox" id="ck" name="ck" value="yes">동의합니다</div>
+               </td>
+            </tr>
+         </table>
+      </fieldset>
+      <div>
+         <button type="button" id="signinBtn">회원가입</button>
+      </div>
+   </form>
+   <br>
+   <script>
+      let signinBtn = document.querySelector('#signinBtn');
+      
+      signinBtn.addEventListener('click', function(){
+         // 디버깅
+         console.log('siginBtn clik!');    	
+       	 console.log(document.querySelector('#ck').value); 	
+         
+         
+         // ID 폼 유효성 검사
+         let id = document.querySelector('#id');
+         if(id.value == '') {
+            alert('id를 입력하세요');
+            id.focus(); // 브라우저의 커스를 id태그로 이동
+            return;
+         }
+         
+         // PW 폼 유효성 검사
+         let pw = document.querySelector('#pw');
+         let pwConfirm = document.querySelector('#pwConfirm');
+         if(pw.value == '' || pw.value != pwConfirm.value) {
+            alert('pw를 확인하세요');
+            pw.focus();
+            return;
+         }
+         
+         // NAME 폼 유효성 검사
+         
+         // SN1, SN2 폼 유효성 검사
+         let sn1 = document.querySelector('#sn1');
+         let sn2 = document.querySelector('#sn2');
+         if(sn1.value.length != 6 || sn2.value.length != 7) {
+            alert('주민번호를 확인하세요');
+            sn1.focus();
+            return;
+         }
+         
+         //lunarSolar(음력/양력) 라디오 유효성 검사
+    	 let lunarSolar = document.querySelectorAll('.lunarSolar:checked'); // querySelectorAll의 반환타입은 배열
+    	 if(lunarSolar.length !=1 ){
+    		 alert('음력/양력을 선택하시오');
+    		 lunarSolar.focus();
+    		 return;
+    	 }
+    	 
+    	 // localNum(지역 전화번호)
+    	 let localNum = document.querySelector('#localNum');
+         if(localNum.value == '') {
+            alert('전화번호를 입력하세요');
+            localNum.focus(); // 브라우저의 커스를 id태그로 이동
+            return;
+         }
+         //약관동의
+         let ck = document.querySelectorAll('.ck:checked');
+                  
+         
+         let signinForm = document.querySelector('#signinForm');
+         signinForm.submit(); // action="./signinAction.jsp"
+      });
+   </script>
+</body>
+</html>

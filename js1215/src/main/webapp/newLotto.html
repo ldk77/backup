@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>58기 자바스크립트 로또</title>
+<style>
+    div     {width:120px;height:120px;
+            border:1px solid gray;
+            display:table; float:left;
+            margin-right:5px;}
+   
+    p       {font-size:50px;
+            display:table-cell;
+            text-align:center;
+            vertical-align:middle;}
+   
+    nav     {clear:both;
+            text-align:center;
+            width:884px;}
+   
+    #red    {background-color:red;}
+    #orange {background-color:orange;} 
+    #yellow {background-color:yellow;} 
+    #green  {background-color:green;}  
+    #blue   {background-color:blue;}   
+    #navy   {background-color:navy;}   
+    #purple {background-color:purple;}     
+</style>
+<script>
+    window.addEventListener("load", function(){
+        var start = document.querySelector("#start");
+        var stop = document.querySelector("#stop");
+       
+        var redNum = document.querySelector("#red_num");
+        var orangeNum = document.querySelector("#orange_num");
+        var yellowNum = document.querySelector("#yellow_num");
+        var greenNum = document.querySelector("#green_num");
+        var blueNum = document.querySelector("#blue_num");
+        var navyNum = document.querySelector("#navy_num");
+        var purpleNum = document.querySelector("#purple_num");
+       
+        var flag = false;
+        var one,two,three,four,five,six,seven;
+       
+        start.addEventListener("click",function(){
+            if(!flag){
+                flag = true;
+                one = setInterval(function(){
+                    redNum.innerHTML = Math.floor(Math.random()*45)+1; 
+                }, 50);
+               
+                two = setInterval(function(){
+                    orangeNum.innerHTML = Math.floor(Math.random()*45)+1;  
+                }, 50);
+               
+                three = setInterval(function(){
+                    yellowNum.innerHTML = Math.floor(Math.random()*45)+1;  
+                }, 50);
+               
+                four = setInterval(function(){
+                    greenNum.innerHTML = Math.floor(Math.random()*45)+1;   
+                }, 50);
+               
+                five = setInterval(function(){
+                    blueNum.innerHTML = Math.floor(Math.random()*45)+1;
+                }, 50);
+               
+                six = setInterval(function(){
+                    navyNum.innerHTML = Math.floor(Math.random()*45)+1;
+                }, 50);
+               
+                seven = setInterval(function(){
+                    purpleNum.innerHTML = Math.floor(Math.random()*45)+1;  
+                }, 50);
+            }
+        });
+       
+        stop.addEventListener("click", function(){
+            if(flag) {
+                var result = lotto(7);
+                setTimeout(function(){
+                    clearInterval(one);
+                    redNum.innerHTML = result[0];
+                }, 1);
+               
+                setTimeout(function(){
+                    clearInterval(two);
+                    orangeNum.innerHTML = result[1];
+                }, 1000);
+               
+                setTimeout(function(){
+                    clearInterval(three);
+                    yellowNum.innerHTML = result[2];
+                }, 2000);
+               
+                setTimeout(function(){
+                    clearInterval(four);
+                    greenNum.innerHTML = result[3];
+                }, 3000);
+               
+                setTimeout(function(){
+                    clearInterval(five);
+                    blueNum.innerHTML = result[4];
+                }, 4000);
+               
+                setTimeout(function(){
+                    clearInterval(six);
+                    navyNum.innerHTML = result[5];
+                }, 5000);
+               
+                setTimeout(function(){
+                    clearInterval(seven);
+                    purpleNum.innerHTML = result[6];
+                    flag = false;
+                }, 6000);
+            }
+        });
+    });
+   
+    function lotto(n){
+        var arr = new Array(45);
+        for(var i=0; i<arr.length; i++){
+            arr[i] = i+1;
+        }
+       
+        for(var j=0; j<10000; j++){
+            var temp = arr[0];
+            var ran = Math.floor(Math.random()*45);
+            arr[0] = arr[ran];
+            arr[ran] = temp;
+        }
+       
+        return arr.slice(0, n);
+    }
+   
+//  var test = lotto(7);
+//  console.log(test);
+</script>
+</head>
+<body>
+    <h1>로또 생성기</h1>
+    <div id="red"><p id="red_num">0</p></div>
+    <div id="orange"><p id="orange_num">0</p></div>
+    <div id="yellow"><p id="yellow_num">0</p></div>
+    <div id="green"><p id="green_num">0</p></div>
+    <div id="blue"><p id="blue_num">0</p></div>
+    <div id="navy"><p id="navy_num">0</p></div>
+    <div id="purple"><p id="purple_num">0</p></div>
+    <nav>
+        <input type="button" value="start" id="start">
+        <input type="button" value="stop" id="stop">
+    </nav>
+</body>
+</html>
